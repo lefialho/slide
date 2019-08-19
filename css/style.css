@@ -1,0 +1,33 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.slide-wrapper {
+  overflow: hidden
+}
+
+.slide {
+  display: flex;
+}
+
+.slide * {
+  flex-shrink: 0;
+  width: 80vw;
+  max-width: 80rem;
+  margin: 0 2rem; 
+}

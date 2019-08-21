@@ -18,7 +18,8 @@ img {
 }
 
 .slide-wrapper {
-  overflow: hidden
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
 .slide {

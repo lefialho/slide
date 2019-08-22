@@ -34,20 +34,41 @@ img {
   will-change: transform;
 }
 
-.slide > * {
+.slide>* {
   flex-shrink: 0;
   width: 80vw;
   max-width: 80rem;
-  margin: 0 2rem; 
+  margin: 0 2rem;
   opacity: .8;
   transform: scale(.8);
   transition: .4s;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
 }
 
-.slide > *.active {
+.slide>*.active {
   opacity: 1;
   transform: scale(1);
+}
+
+[data-control="slide"] {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+[data-control="slide"] > * > * {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: #FB5;
+  border-radius: 50%;
+  overflow: hidden;
+  text-indent: -999px;
+  margin: .5rem;
+} 
+
+[data-control="slide"] > *.active > *, [data-control="slide"] > * > *:hover {
+  background: #E54;
 }

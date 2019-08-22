@@ -5,6 +5,10 @@ export default class Slide {
     this.distance = {finalPosition: 0, startX: 0, movement: 0}
   }
 
+  transition(active) {
+    this.slide.style.transition = active ? 'transform .3s' : '';
+  }
+
   moveSlide(distanceX) {
     this.distance.movePosition = distanceX;
     this.slide.style.transform = `translate3d(${distanceX}px, 0, 0`;
@@ -30,6 +34,7 @@ export default class Slide {
       // console.log(event)
     }
     this.wrapper.addEventListener(moveType, this.onMove);
+    this.transition(false);
     // console.log(event)
     // console.log(this)
     // console.log('mouseDown');
@@ -47,7 +52,20 @@ export default class Slide {
     const moveType = (event.type === 'mouseup') ? 'mousemove' : 'touchmove'
     this.wrapper.removeEventListener(moveType, this.onMove);
     this.distance.finalPosition = this.distance.movePosition;
+    this.transition(true);
+    this.changeSlideOnEnd();
      // console.log('end');
+  }
+
+  changeSlideOnEnd() {
+    if(this.distance.movement > 50 && this.index.next !== undefined) {
+      this.activeNextSlide();
+    } else if (this.distance.movement < -50 &&this.index.prev !== undefined) {
+      this.activePrevSlide();
+    } else {
+      this.changeSlide(this.index.active)
+    }
+    // console.log(this.distance.movement)
   }
 
   addSlideEvents() {
@@ -95,12 +113,23 @@ export default class Slide {
     this.moveSlide(activeSlide.position);
     this.slideIndexNav(index);
     this.distance.finalPosition = activeSlide.position;
-    console.log(activeSlide)
+    // console.log(activeSlide)
     // console.log(this.index)
+  }
+
+  activePrevSlide() {
+    if(this.index.prev !== undefined)
+      this.changeSlide(this.index.prev)
+  }
+
+  activeNextSlide() {
+    if(this.index.next !== undefined)
+      this.changeSlide(this.index.next)
   }
 
   init() {
     this.bindEvents();
+    this.transition(true);
     this.addSlideEvents();
     this.slidesConfig();
     return this;
